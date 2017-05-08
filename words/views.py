@@ -4,7 +4,7 @@ from .models import Book, Word
 
 
 def index(request):
-    top_books = Book.objects.all()[:5]  # TODO optimize
+    top_books = Book.objects.all()[:15]
     context = {'top_books': top_books}
     return render(request, 'words/index.html', context)
 
