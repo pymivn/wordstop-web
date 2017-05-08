@@ -1,8 +1,11 @@
 {% extends "words/base.html" %}
 
 {% block content %}
-<h2>{{ book.name }} by {{ book.author }}</h2>
-    <br/>
+<a href="{{ book.source }}">
+    <h2>{{ book.name }} by {{ book.author }}</h2>
+</a>
+<br/>
+
 	<div class="panel panel-default">
 	  <!-- Default panel contents -->
 	  <div class="panel-heading">Most common words</div>

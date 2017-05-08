@@ -18,9 +18,10 @@ class Command(BaseCommand):
             try:
                 with open(f) as text:
 
-                    title, author, language = wordstop.get_gutenberg_info(text)  # NOQA
+                    title, author, language, url = wordstop.get_gutenberg_info(text)  # NOQA
                     if all([title, author, language]):
-                        b = Book(name=title, author=author, language=language)
+                        b = Book(name=title, author=author,
+                                 language=language, source=url)
                     else:
                         # Go back to the first line as this is not Gutenberg
                         # as we iterated to find out if the file is Gutenberg

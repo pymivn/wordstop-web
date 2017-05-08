@@ -4,7 +4,7 @@ from django.db import models
 class Book(models.Model):
     name = models.CharField(max_length=300)
     author = models.CharField(max_length=100, default='')
-    source = models.CharField(default='Gutenberg', max_length=300)
+    source = models.CharField(default='', max_length=300)
     isbn = models.CharField(max_length=20, default='')
     language = models.CharField(max_length=20, default='English')
 
