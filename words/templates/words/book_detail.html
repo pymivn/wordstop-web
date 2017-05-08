@@ -1,0 +1,23 @@
+{% extends "words/base.html" %}
+
+{% block content %}
+<h2>{{ book.name }} by {{ book.author }}</h2>
+    <br/>
+	<div class="panel panel-default">
+	  <!-- Default panel contents -->
+	  <div class="panel-heading">Most common words</div>
+
+	  <table class="table">
+		<thead>
+			<th>Word<th>Frequency</th><th>Example</th>
+
+        </thead>
+        {% for word in words %}
+		<tr>
+			<td>{{ word.word }}</td> <td>{{ word.frequency }}</td> <td>{{ word.example }}</td>
+		</tr>
+        {% endfor %}
+	  </table>
+	</div>
+
+{% endblock content %}
