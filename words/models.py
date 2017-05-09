@@ -8,6 +8,9 @@ class Book(models.Model):
     isbn = models.CharField(max_length=20, default='')
     language = models.CharField(max_length=20, default='English')
 
+    class Meta:
+        unique_together = ('name', 'author')
+
     def __str__(self):
         return self.name
 

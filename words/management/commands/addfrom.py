@@ -1,6 +1,7 @@
 import os
 
 from django.core.management.base import BaseCommand, CommandError
+from django.db.utils import IntegrityError
 from words.models import Word, Book
 
 import wordstop
@@ -25,18 +26,28 @@ class Command(BaseCommand):
                         # Go back to the first line as this is not Gutenberg
                         # as we iterated to find out if the file is Gutenberg
                         name = os.path.basename(f)
+                        bookinfo['name'] = name
                         b = Book(name=name)
-                    b.save()
+
+                    try:
+                        b.save()
+                    except IntegrityError:
+                        b = Book.objects.get(
+                            name=bookinfo['name'],
+                            author=bookinfo['author']
+                        )
 
                     counts, examples = wordstop.count(text,
                                                       stop_cond=_stop_cond,
                                                       stop_word=False)
                     for word, count in counts.most_common(300):
-                        w = Word(word=word,
-                                 frequency=count,
-                                 example=examples[word],
-                                 book=b)
-                        w.save()
+                        obj, created = Word.objects.update_or_create(
+                            word=word,
+                            frequency=count,
+                            example=examples[word],
+                            book=b
+                        )
+                        # TODO handle obj and created
             except OSError:
                 raise CommandError('Cannot access %s file' % f)
 
