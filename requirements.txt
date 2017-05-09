@@ -1,2 +1,3 @@
 Django>=1.11.1
 wordstop
+social-auth-app-django

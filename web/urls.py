@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^books/', include('words.urls')),
     url(r'^admin/', admin.site.urls),
+    url('', include('social_django.urls', namespace='social')),
 ]
