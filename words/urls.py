@@ -5,7 +5,7 @@ app_name = 'books'
 
 urlpatterns = [
     # ex: /books/
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.BookList.as_view()),
     # ex: /books/5/
-    url(r'^(?P<book_id>[0-9]+)/$', views.detail, name='detail'),
+    url(r'^(?P<id>[0-9]+)/$', views.BookDetail.as_view()),
 ]

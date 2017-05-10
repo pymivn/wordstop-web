@@ -1,17 +1,20 @@
-from django.shortcuts import render
-
+import logging
+from django.views.generic import ListView, DetailView
 from .models import Book, Word
 
-
-def index(request):
-    top_books = Book.objects.all()[:15]
-    context = {'top_books': top_books}
-    return render(request, 'words/index.html', context)
+logger = logging.getLogger(__name__)
 
 
-def detail(request, book_id):
-    book = Book.objects.get(pk=book_id)
-    words = Word.objects.filter(book_id=book_id).order_by('-frequency')
-    context = {'book': book, 'words': words}
+class BookList(ListView):
+    model = Book
 
-    return render(request, 'words/book_detail.html', context)
+
+class BookDetail(DetailView):
+    model = Book
+    pk_url_kwarg = 'id'
+
+    def get_context_data(self, **kwargs):
+        context = super(BookDetail, self).get_context_data(**kwargs)
+
+        context['words'] = Word.objects.filter(book_id=self.kwargs['id']).order_by('-frequency')  # NOQA
+        return context

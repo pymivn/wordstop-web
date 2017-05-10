@@ -1,9 +1,9 @@
 {% extends "words/base.html" %}
 
 {% block content %}
-    {% if top_books %}
+    {% if book_list %}
         <ul>
-        {% for book in top_books %}
+        {% for book in book_list %}
         <li><a href="/books/{{ book.id }}/">{{ book.name }} by {{ book.author }}</a></li>
         {% endfor %}
         </ul>
