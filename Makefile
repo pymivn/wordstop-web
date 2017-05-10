@@ -14,6 +14,8 @@ import:
 
 init: migrate import
 
+test:
+	python manage.py test words
 
 reset:
 	rm -r db.sqlite3 words/migrations
