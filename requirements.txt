@@ -1,2 +1,5 @@
 Django>=1.11.1
 wordstop
+
+# For test
+flake8

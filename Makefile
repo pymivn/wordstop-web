@@ -17,5 +17,10 @@ init: migrate import
 test:
 	python manage.py test words
 
+lint:
+	flake8 --exclude migrations/ words
+
+ci: lint test
+
 reset:
 	rm -r db.sqlite3 words/migrations
