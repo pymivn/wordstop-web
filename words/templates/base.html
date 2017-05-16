@@ -45,9 +45,12 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
             {% if user.is_authenticated %}
-                <li> {{ user.username }} </li>
+            <li><a href="/{{ user.username }}">{{ user.username }}</a></li>
+            <!-- TODO -->
+            <li><a href="/logout">Logout</a></li>
+
             {% else %}
-                <li> LOGIN </li>
+            <li><a href="/login">Login</a></li>
             {% endif %}
           </ul>
         </div><!--/.nav-collapse -->

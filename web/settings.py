@@ -70,6 +70,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'web.wsgi.application'
 
+LOGIN_REDIRECT_URL = '/books'
+LOGOUT_REDIRECT_URL = '/books'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
