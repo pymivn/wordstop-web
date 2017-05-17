@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^$', views.BookList.as_view()),
     # ex: /books/5/
     url(r'^(?P<id>[0-9]+)/$', views.BookDetail.as_view()),
+    url(r'^profile/$', views.profile),
 ]

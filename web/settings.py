@@ -70,6 +70,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'web.wsgi.application'
 
+LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/books'
 LOGOUT_REDIRECT_URL = '/books'
 

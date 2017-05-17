@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.dispatch import receiver
 
 
 class Book(models.Model):
@@ -23,3 +25,19 @@ class Word(models.Model):
 
     def __str__(self):
         return self.word
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    words = models.ManyToManyField(Word)
+
+    def __str__(self):
+        return str(self.user)
+
+
+@receiver(models.signals.post_save, sender=User)
+def create_new_worduser(sender, **kwargs):
+    user = kwargs["instance"]
+    if kwargs["created"]:
+        profile = Profile(user=user)
+        profile.save()

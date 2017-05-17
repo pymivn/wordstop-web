@@ -1,14 +1,15 @@
-import logging
 from django.views.generic import ListView, DetailView
-from .models import Book, Word
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
-logger = logging.getLogger(__name__)
+from .models import Book, Word, Profile
 
 
 class BookList(ListView):
     model = Book
 
 
+# TODO(HVN) add words by choice item and submit form
 class BookDetail(DetailView):
     model = Book
     pk_url_kwarg = 'id'
@@ -18,3 +19,13 @@ class BookDetail(DetailView):
 
         context['words'] = Word.objects.filter(book_id=self.kwargs['id']).order_by('-frequency')  # NOQA
         return context
+
+
+# TODO(HVN) handle when logged in user access /login
+# TODO(HVN) hide words, mark as learnt
+@login_required
+def profile(request):
+    p = Profile.objects.get(user_id=request.user.id)
+    context = {'words': p.words.all()}
+
+    return render(request, 'words/profile.html', context)
