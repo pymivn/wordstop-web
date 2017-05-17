@@ -1,4 +1,4 @@
-all: run
+all: todo run
 
 migrate:
 	python manage.py makemigrations
@@ -21,6 +21,9 @@ lint:
 	flake8 --exclude migrations/ words
 
 ci: lint test
+
+todo:
+	grep -Rin todo .
 
 reset:
 	rm -r db.sqlite3 words/migrations
