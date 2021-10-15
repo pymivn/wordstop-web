@@ -2,11 +2,13 @@ import os
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db.utils import IntegrityError
+from nltk import translate
 from words.models import Word, Book
 
 import wordstop
 from wordstop import gutenberg_stop_cond as _stop_cond
 
+from modules.translate import Translate
 
 class Command(BaseCommand):
     help = 'Add words from given text file'
@@ -41,11 +43,14 @@ class Command(BaseCommand):
                                                       stop_cond=_stop_cond,
                                                       stop_word=False)
                     for word, count in counts.most_common(300):
+                        translate = Translate(word)
+                        word_vi = translate.translate_word()
                         obj, created = Word.objects.update_or_create(
                             word=word,
                             frequency=count,
                             example=examples[word],
-                            book=b
+                            book=b,
+                            translate_vi = word_vi
                         )
                         # TODO handle obj and created
             except OSError:

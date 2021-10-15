@@ -17,7 +17,10 @@
         </thead>
         {% for word in words %}
 		<tr>
-			<td><a href="https://www.google.com/search?q={{ word.word }}" target="_blank">{{ word.word }}</a></td> <td>{{ word.frequency }}</td> <td>{{ word.example }}</td>
+			<td><a href="https://www.google.com/search?q={{ word.word }}" target="_blank">{{ word.word }}</a></td> 
+			<td>{{ word.frequency }}</td> 
+			<td>{{ word.example }}</td>
+			<td>{{ word.translate_vi }}</td>
 		</tr>
         {% endfor %}
 	  </table>
