@@ -19,7 +19,8 @@ class Word(models.Model):
     word = models.CharField(max_length=31)
     frequency = models.IntegerField(default=0)
     example = models.TextField(default='')
-    book = models.ForeignKey(Book)
+    translate_vi = models.TextField(default='')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.word
